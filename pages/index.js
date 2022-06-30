@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Boomer Buddy</a>
+          Welcome to Boomer Buddy
         </h1>
 
         {/* <p className={styles.description}>
@@ -22,33 +23,41 @@ export default function Home() {
         </p> */}
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Dictionary &rarr;</h2>
-            <p>Save defintions for your youngun's most commonly used slang</p>
-          </a>
+          <Link href="/dictionary/1">
+            <a className={styles.card}>
+              <h2>Dictionary &rarr;</h2>
+              <p>Save defintions for your youngun's most commonly used slang</p>
+            </a>
+          </Link>
+          {/* <a href="https://nextjs.org/docs" className={styles.card}>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Groups &rarr;</h2>
-            <p>Chat about things with your friend groups</p>
-          </a>
+          </a> */}
 
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
+          <Link href="/groups/1">
+            <a className={styles.card}>
+              <h2>Groups &rarr;</h2>
+              <p>Chat about things with your friend groups</p>
+            </a>
+          </Link>
+
+          <Link href="/fact">
+          <a className={styles.card} >
             <h2>Random Fact &rarr;</h2>
             <p>Learn one new thing to keep your mind sharp</p>
           </a>
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Random Drink &rarr;</h2>
-            <p>
-              Because you'll probably need this later...
-            </p>
-          </a>
+          </Link>
+
+
+          <Link href="/drink">
+            <a className={styles.card} >
+              <h2>Random Drink &rarr;</h2>
+              <p>
+                Because you'll probably need this later...
+              </p>
+            </a>
+          </Link>
+
         </div>
       </main>
 
