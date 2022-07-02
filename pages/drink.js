@@ -6,7 +6,12 @@ import Head from 'next/head';
 export async function findDrink() {
   const data = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
   const jsonData = await data.json()
-  const drink = jsonData.drinks[0].strDrink
+  console.log("jsonData.drinks[0]", jsonData.drinks[0])
+  const drink = {}
+  drink.name = jsonData.drinks[0].strDrink;
+  drink.alcho = jsonData.drinks[0].strAlcoholic;
+
+  // const drink = jsonData.drinks[0].strDrink
 
   return drink;
 }
@@ -42,7 +47,9 @@ export default function Drink({ drinkData }) {
         alt="Drink"
       >
       </Image>
-      <p>{drinkData}</p>
+      <h2>{drinkData.name}</h2>
+      <p> <em>{drinkData.alcho}</em></p>
+      {/* <p>{drinkData}</p> */}
       <br></br>
       <Link href="/">
         <a>Back to home</a>
