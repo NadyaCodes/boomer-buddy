@@ -7,7 +7,7 @@ export default function Groups() {
       <Head>
         <title>Groups</title>
       </Head>
-      <h1>My Dictionary</h1>
+      <h1>Groups</h1>
       <Link href="/">
         <a>Back to home</a>
       </Link>
