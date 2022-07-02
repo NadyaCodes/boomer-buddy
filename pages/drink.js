@@ -1,16 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image'
 import Head from 'next/head';
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
 
 
 export async function findDrink() {
   const data = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
   const jsonData = await data.json()
-  console.log("jsonData.drinks[0]", jsonData.drinks[0])
-  // const drink = {}
-  // drink.name = jsonData.drinks[0].strDrink;
-  // drink.alcho = jsonData.drinks[0].strAlcoholic;
 
   const drink = jsonData.drinks[0]
 
@@ -36,48 +32,31 @@ export default function Drink({ drinkData }) {
   
 
   const findIngredients = (drinkData) => {
-    const ingredients = {}
+    const allIngredients = []
 
-    if (drinkData.strIngredient1 !== null) {
-      ingredients.ingredient1 = drinkData.strIngredient1
-      ingredients.measurement1 = drinkData.strMeasure1
+    for (let i = 1; i <= 15; i++) {
+      let drinkIng = `strIngredient${i}`;
+      let drinkAm = `strMeasure${i}`
+      if (drinkData[drinkIng] !== null) {
+        const ingredients = []
+        ingredients.push(drinkData[drinkIng])
+        ingredients.push(drinkData[drinkAm])
+        allIngredients.push(ingredients)
+      }
     }
-
-    if (drinkData.strIngredient2 != null) {
-      ingredients.ingredient2 = drinkData.strIngredient2
-      ingredients.measurement2 = drinkData.strMeasure2
-    }
-
-    if (drinkData.strIngredient3 != null) {
-      ingredients.ingredient3 = drinkData.strIngredient3
-      ingredients.measurement3 = drinkData.strMeasure3
-    }
-
-    if (drinkData.strIngredient4 != null) {
-      ingredients.ingredient4 = drinkData.strIngredient4
-      ingredients.measurement4 = drinkData.strMeasure4
-    }
-
-
-    if (drinkData.strIngredient5 != null) {
-      ingredients.ingredient5 = drinkData.strIngredient5
-      ingredients.measurement5 = drinkData.strMeasure5
-    }
-
-    if (drinkData.strIngredient6 != null) {
-      ingredients.ingredient6 = drinkData.strIngredient6
-      ingredients.measurement6 = drinkData.strMeasure6
-    }
-
-    return ingredients;
-
+    console.log(allIngredients)
+    return allIngredients;
   }
 
 
   const ingredients = findIngredients(drinkData)
 
-  
-  // const image = "${drinkData.strDrinkThumb}"
+  const ingredientsDisplay = [];
+
+  for (let i = 0; i < ingredients.length; i++) {
+    ingredientsDisplay.push(<p>{ingredients[i][0]} - <em>{ingredients[i][1]}</em></p>);
+  }
+
 
   const myLoader=({src})=>{
     return `${drinkData.strDrinkThumb}`;
@@ -104,20 +83,14 @@ export default function Drink({ drinkData }) {
       <p> Ideal glass: <em>{drinkData.strGlass}</em></p>
       <br />
       <h2>Ingredients</h2>
-      <p>{ingredients.ingredient1} - <em>{ingredients.measurement1}</em></p>
-      {ingredients.ingredient2 ? <p>{ingredients.ingredient2} - <em>{ingredients.measurement2}</em></p> : ''}
-      {ingredients.ingredient3 ? <p>{ingredients.ingredient3} - <em>{ingredients.measurement3}</em></p> : ''}
-      {ingredients.ingredient4 ? <p>{ingredients.ingredient4} - <em>{ingredients.measurement4}</em></p> : ''}
-      {ingredients.ingredient5 ? <p>{ingredients.ingredient5} - <em>{ingredients.measurement5}</em></p> : ''}
-      {ingredients.ingredient6 ? <p>{ingredients.ingredient6} - <em>{ingredients.measurement6}</em></p> : ''}
-      <p></p>
-
-      <p>Instructions:</p>
+      {ingredientsDisplay}
+      <br />
+      <h2>Instructions:</h2>
       <p><em>{drinkData.strInstructions}</em></p>
-      <br></br>
+      <br></br><button>
       <Link href="/">
         <a>Back to home</a>
-      </Link>
+      </Link></button>
     </>
   )
 }
