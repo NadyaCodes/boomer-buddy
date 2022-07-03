@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import cookies from 'next-cookies';
 
 
 export default function Login() {
@@ -14,7 +15,7 @@ export default function Login() {
     setUser(event.target.value);
     setPassword(event.target.value);
     document.cookie = `user=${user}`;
-    window.location.href = "/home";
+    window.location.href = `/home?user=${user}`;
   }
 
     

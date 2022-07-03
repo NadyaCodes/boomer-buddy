@@ -2,15 +2,28 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
-import Login from './login'
+import cookies from 'next-cookies';
 import Logout from './logout'
 import React, {useState, useEffect} from 'react'
-import cookies from 'next-cookies'
+import { useRouter } from 'next/router'
 
-// async function getInitialProps(ctx) {
+
+// async function getStaticProps(ctx) {
 //   return {
 //     user: cookies(ctx).user || ''
 //   }
+// }
+
+
+// export async function getStaticProps(ctx) {
+
+//   // const factData = await findFact()
+//   return {
+//     props: {
+//       user: cookies(ctx).user || ''
+//     }
+//   }
+
 // }
 
 // export async function getStaticProps(ctx) {
@@ -26,6 +39,18 @@ import cookies from 'next-cookies'
 
 // }
 
+// export const getServerSideProps = async ({ req, res }) => {
+//   // const res = await fetch(`http://localhost:5000/api/posts/`);
+
+//   // const posts = await res.json();
+
+//   return {
+//     props: {
+//       user: res.cookies.user,
+//     },
+//   };
+// };
+
 export default function Home() {
   // const [user, setUser] = useState("")
 
@@ -36,7 +61,10 @@ export default function Home() {
   // console.log("user", user)
   // console.log("user", {user})
 
-  let user = 2;
+  // let user = {user};
+
+  const router = useRouter()
+  const { user } = router.query
 
 
   return (
