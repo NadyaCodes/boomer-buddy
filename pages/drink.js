@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image'
 import Head from 'next/head';
 // import React, { useEffect } from 'react';
+import { useRouter } from 'next/router'
 
 
 export async function findDrink() {
@@ -29,7 +30,8 @@ export async function getStaticProps() {
 
 export default function Drink({ drinkData }) {
 
-  
+  const router = useRouter()
+  const { user } = router.query
 
   const findIngredients = (drinkData) => {
     const allIngredients = []
@@ -88,7 +90,12 @@ export default function Drink({ drinkData }) {
       <h2>Instructions:</h2>
       <p><em>{drinkData.strInstructions}</em></p>
       <br></br><button>
-      <Link href="/home">
+      <Link href={{
+        pathname: "/home",
+        query: {
+          user
+        }}} as={`home/${user}`}
+      >
         <a>Back to home</a>
       </Link></button>
     </>

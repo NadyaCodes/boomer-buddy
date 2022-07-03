@@ -93,7 +93,12 @@ export default function Home() {
         </p> */}
 
         <div className={styles.grid}>
-          <Link href={'/dictionary/' + user}>
+        <Link href={{
+            pathname: "/dictionary",
+            query: {
+                user
+            }}} as={`dictionary/${user}`}
+          >
             <a className={styles.card}>
               <h2>Dictionary &rarr;</h2>
               <p>Save defintions for your youngun's most commonly used slang</p>
@@ -103,14 +108,24 @@ export default function Home() {
 
           </a> */}
 
-          <Link href={'/groups/' + user}>
+          <Link href={{
+            pathname: "/groups",
+            query: {
+                user
+            }}} as={`groups/${user}`}
+          >
             <a className={styles.card}>
               <h2>Groups &rarr;</h2>
               <p>Chat about things with your friend groups</p>
             </a>
           </Link>
 
-          <Link href="/fact">
+          <Link href={{
+            pathname: "/fact",
+            query: {
+                user
+            }}} as={`fact/${user}`}
+          >
           <a className={styles.card} >
             <h2>Random Fact &rarr;</h2>
             <p>Learn one new thing to keep your mind sharp</p>
@@ -119,7 +134,12 @@ export default function Home() {
           </Link>
 
 
-          <Link href="/drink">
+          <Link href={{
+            pathname: "/drink",
+            query: {
+                user
+            }}} as={`drink/${user}`}
+          >
             <a className={styles.card} >
               <h2>Random Drink &rarr;</h2>
               <p>

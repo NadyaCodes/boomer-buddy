@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 export async function findFact() {
   const data = await fetch('https://uselessfacts.jsph.pl/random.json?language=en')
@@ -25,6 +26,9 @@ export async function getStaticProps() {
 
 
 export default function Fact( {factData} ) {
+  const router = useRouter()
+  const { user } = router.query
+  
   return(
     <>
       <Head>
@@ -32,7 +36,13 @@ export default function Fact( {factData} ) {
       </Head>
       <h1>Random Fact</h1>
       <p>{factData}</p>
-      <button><Link href="/home">
+      <button>
+      <Link href={{
+        pathname: "/home",
+        query: {
+          user
+        }}} as={`home/${user}`}
+      >
         <a>Back to home</a>
       </Link></button>
     </>
