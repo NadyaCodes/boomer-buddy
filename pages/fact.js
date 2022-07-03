@@ -32,7 +32,7 @@ export default function Fact( {factData} ) {
       </Head>
       <h1>Random Fact</h1>
       <p>{factData}</p>
-      <button><Link href="/">
+      <button><Link href="/home">
         <a>Back to home</a>
       </Link></button>
     </>

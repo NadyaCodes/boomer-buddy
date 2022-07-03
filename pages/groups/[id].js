@@ -8,9 +8,11 @@ export default function Groups() {
         <title>Groups</title>
       </Head>
       <h1>Groups</h1>
-      <Link href="/">
+      <button>
+      <Link href="/home">
         <a>Back to home</a>
       </Link>
+      </button>
     </>
   )
 }

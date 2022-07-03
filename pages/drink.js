@@ -88,7 +88,7 @@ export default function Drink({ drinkData }) {
       <h2>Instructions:</h2>
       <p><em>{drinkData.strInstructions}</em></p>
       <br></br><button>
-      <Link href="/">
+      <Link href="/home">
         <a>Back to home</a>
       </Link></button>
     </>

@@ -54,7 +54,7 @@ const onChangeHandler = event => {
       {word && <Definition />}
 
       <button>
-      <Link href="/">
+      <Link href="/home">
         <a>Back to home</a>
       </Link>
       </button>
