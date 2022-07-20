@@ -6,12 +6,7 @@ import useSWR from 'swr';
 import { useRouter } from 'next/router'
 
 
-  
-
 const fetcher = url => fetch(url).then(r => r.json())
-
-
-
 
 export default function DictionaryEntries(  ) {
 
@@ -20,9 +15,10 @@ export default function DictionaryEntries(  ) {
   
 
   const [word, setWord] = useState('');
+  const [toDefine, settoDefine] = useState('')
 
   function Definition() {
-    const { data, error } = useSWR(`https://api.urbandictionary.com/v0/define?term=${word}`, fetcher);
+    const { data, error } = useSWR(`https://api.urbandictionary.com/v0/define?term=${toDefine}`, fetcher);
 
     if (error) return <div>failed to load</div>;
     if (!data) return <div>loading...</div>;
@@ -44,6 +40,10 @@ const onChangeHandler = event => {
   //  console.log(word)
 };
 
+const define = event => {
+  settoDefine(event.target.value)
+}
+
 
   return (
     <>
@@ -52,7 +52,8 @@ const onChangeHandler = event => {
       </Head>
       <h1>My Dictionary</h1>
         <input type="text" id="dictionaryWord" name="dictionaryWord" onChange={onChangeHandler} value={word}></input>
-      <p>Looking up word: {word}</p>
+        <button type='submit' id="selectedWord" name="selectedWord" onClick={define} value={word}>What does this mean?</button>
+      <p>Looking up word: {toDefine}</p>
       <p>Definition:</p>
       
       {word && <Definition />}
